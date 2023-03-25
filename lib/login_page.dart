@@ -42,6 +42,7 @@ class _LoginPageState extends State<LoginPage> {
                   'Login',
                   style: TextStyle(color: Colors.grey),
                 ),
+
                 const SizedBox(height: 40.0),
                 Form(
                   key: _formKey,
@@ -64,6 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                           return null;
                         },
                       ),
+
                       const SizedBox(height: 20.0),
                       TextFormField(
                         controller: _passwordController,
@@ -77,6 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         obscureText: true,
                       ),
+
                       const SizedBox(height: 30.0),
                       SizedBox(
                         width: double.infinity,
@@ -105,6 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
+
                 const SizedBox(height: 15.0),
                 Center(
                   child: TextButton(
@@ -114,55 +118,23 @@ class _LoginPageState extends State<LoginPage> {
                     child: const Text('Registration'),
                   ),
                 ),
-                // const SizedBox(height: 15.0),
-                // Center(
-                //   child: TextButton(
-                //     onPressed: () {
-                //       FirebaseAuth.instance.signInAnonymously().then((value) {
-                //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                //           content: Text(
-                //             "${value.user?.email}, ${value.user?.uid}",
-                //           ),
-                //         ));
-                //       });
-                //     },
-                //     child: const Text('Anonimous'),
-                //   ),
-                // ),
-                // const SizedBox(height: 15.0),
-                // Center(
-                //   child: TextButton(
-                //     onPressed: () {
-                //       try {
-                //         FirebaseAuth.instance
-                //             .sendSignInLinkToEmail(
-                //                 email: _emailController.text,
-                //                 actionCodeSettings: ActionCodeSettings(
-                //                     url:
-                //                         "https://flutterapplicationfirebase.page.link/RtQw",
-                //                     handleCodeInApp: true,
-                //                     iOSBundleId:
-                //                         'com.example.flutterApplicationFirebase',
-                //                     androidPackageName:
-                //                         'com.example.flutter_application_firebase',
-                //                     // installIfNotAvailable
-                //                     androidInstallApp: true,
-                //                     // minimumVersion
-                //                     androidMinimumVersion: '12'))
-                //             .then((value) {
-                //           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                //             content: Text(
-                //               "${FirebaseAuth.instance.currentUser!.emailVerified}, ${FirebaseAuth.instance.currentUser!.email}",
-                //             ),
-                //           ));
-                //         });
-                //       } on FirebaseAuthException catch (e) {
-                //         print(e);
-                //       }
-                //     },
-                //     child: const Text('Email link'),
-                //   ),
-                // ),
+
+                const SizedBox(height: 15.0),
+                Center(
+                  child: TextButton(
+                    onPressed: () {
+                      FirebaseAuth.instance.signInAnonymously().then((value) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                            "${value.user?.email}, ${value.user?.uid}",
+                          ),
+                        ));
+                      });
+                    },
+                    child: const Text('Anonimous'),
+                  ),
+                ),
+
                 const SizedBox(height: 15.0),
                 Center(
                   child: TextButton(
@@ -187,97 +159,75 @@ class _LoginPageState extends State<LoginPage> {
                     child: const Text('Google'),
                   ),
                 ),
-                // const SizedBox(height: 15.0),
-                // Center(
-                //   child: TextButton(
-                //     onPressed: () async {
-                //       try {
-                //         await FirebaseAuth.instance.verifyPhoneNumber(
-                //           phoneNumber: _emailController.text,
-                //           codeSent:
-                //               (String verificationId, int? resendToken) async {
-                //             verificationId1 = verificationId;
-                //             resendToken1 = resendToken;
-                //             var showSnackBar = ScaffoldMessenger.of(context)
-                //                 .showSnackBar(const SnackBar(
-                //               content: Text(
-                //                 "SMS отправленo",
-                //               ),
-                //             ));
-                //           },
-                //           codeAutoRetrievalTimeout: (String verificationId) {},
-                //           verificationCompleted:
-                //               (PhoneAuthCredential phoneAuthCredential) {},
-                //           verificationFailed: (FirebaseAuthException error) {},
-                //         );
-                //       } on FirebaseAuthException catch (e) {
-                //         print(e);
-                //       }
-                //     },
-                //     child: const Text('SMS send'),
-                //   ),
-                // ),
-                // const SizedBox(height: 20.0),
-                // TextFormField(
-                //   controller: _smscodeController,
-                //   decoration: InputDecoration(
-                //     filled: true,
-                //     fillColor: Colors.white,
-                //     labelText: 'Smscode',
-                //     border: OutlineInputBorder(
-                //       borderRadius: BorderRadius.circular(10.0),
-                //     ),
-                //   ),
-                // ),
-                // const SizedBox(height: 15.0),
-                // Center(
-                //   child: TextButton(
-                //     onPressed: () async {
-                //       try {
-                //         // Update the UI - wait for the user to enter the SMS code
-                //         String smsCode = _smscodeController.text;
 
-                //         // Create a PhoneAuthCredential with the code
-                //         PhoneAuthCredential credentiall =
-                //             PhoneAuthProvider.credential(
-                //                 verificationId: verificationId1,
-                //                 smsCode: smsCode);
+                const SizedBox(height: 15.0),
+                Center(
+                  child: TextButton(
+                    onPressed: () async {
+                      try {
+                        await FirebaseAuth.instance.verifyPhoneNumber(
+                          phoneNumber: _emailController.text,
+                          codeSent:
+                              (String verificationId, int? resendToken) async {
+                            verificationId1 = verificationId;
+                            resendToken1 = resendToken;
+                            var showSnackBar = ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text(
+                                "SMS отправленo",
+                              ),
+                            ));
+                          },
+                          codeAutoRetrievalTimeout: (String verificationId) {},
+                          verificationCompleted:
+                              (PhoneAuthCredential phoneAuthCredential) {},
+                          verificationFailed: (FirebaseAuthException error) {},
+                        );
+                      } on FirebaseAuthException catch (e) {
+                        print(e);
+                      }
+                    },
+                    child: const Text('SMS send'),
+                  ),
+                ),
 
-                //         // Sign the user in (or link) with the credential
-                //         await FirebaseAuth.instance
-                //             .signInWithCredential(credentiall);
-                //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                //           content: Text(
-                //             "${FirebaseAuth.instance.currentUser!.uid}, ${FirebaseAuth.instance.currentUser!.phoneNumber}",
-                //           ),
-                //         ));
-                //       } on FirebaseAuthException catch (e) {
-                //         print(e);
-                //       }
-                //     },
-                //     child: const Text('SMS Login'),
-                //   ),
-                // ),
-                // const SizedBox(height: 15.0),
-                // Center(
-                //   child: TextButton(
-                //     onPressed: () async {
-                //       try {
-                //         final appleProvider = AppleAuthProvider();
-                //         await FirebaseAuth.instance
-                //             .signInWithProvider(appleProvider);
-                //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                //           content: Text(
-                //             "${FirebaseAuth.instance.currentUser!.uid}, ${FirebaseAuth.instance.currentUser!.phoneNumber}",
-                //           ),
-                //         ));
-                //       } on FirebaseAuthException catch (e) {
-                //         print(e);
-                //       }
-                //     },
-                //     child: const Text('Apple'),
-                //   ),
-                // ),
+                const SizedBox(height: 20.0),
+                TextFormField(
+                  controller: _smscodeController,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white,
+                    labelText: 'Smscode',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 15.0),
+                Center(
+                  child: TextButton(
+                    onPressed: () async {
+                      try {
+                        String smsCode = _smscodeController.text;
+                        PhoneAuthCredential credentiall =
+                            PhoneAuthProvider.credential(
+                                verificationId: verificationId1,
+                                smsCode: smsCode);
+                        await FirebaseAuth.instance
+                            .signInWithCredential(credentiall);
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                            "${FirebaseAuth.instance.currentUser!.uid}, ${FirebaseAuth.instance.currentUser!.phoneNumber}",
+                          ),
+                        ));
+                      } on FirebaseAuthException catch (e) {
+                        print(e);
+                      }
+                    },
+                    child: const Text('SMS Login'),
+                  ),
+                ),
               ],
             ),
           ),
